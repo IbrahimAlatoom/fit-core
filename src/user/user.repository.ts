@@ -9,7 +9,7 @@ import { UserMapper } from './user.mapper';
 export class UserRepository {
   constructor(
     @InjectModel(UserModel.name) private userModel: Model<UserModel>,
-  ) {}
+  ) { }
 
   async createUser(user: User) {
     const model = UserMapper.toModel(user);
@@ -35,6 +35,7 @@ export class UserRepository {
 
   async findAllUsers() {
     const models = await this.userModel.find();
+    console.log(models) ;
     return models.map(UserMapper.toEntity);
   }
 }

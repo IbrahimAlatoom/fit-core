@@ -1,13 +1,13 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { User } from './user.schema';
+import { UserModel } from '../user/user.model';
 import { Role } from './role.schema';
 import { Types } from 'mongoose';
 
 @Schema()
 export class Account extends Document {
     @Prop({ type: Types.ObjectId, ref: 'User', required: true })
-    user: User;
+    user: UserModel;
 
     @Prop({ type: Types.ObjectId, ref: 'Role', required: true })
     role: Role;

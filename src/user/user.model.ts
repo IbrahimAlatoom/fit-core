@@ -4,7 +4,9 @@ import * as mongoose from 'mongoose';
 import * as bcrypt from 'bcryptjs';
 import { Account } from 'src/schemas/account.schema';
 
-@Schema()
+@Schema({
+  collection: "users"
+})
 export class UserModel extends Document {
   // TODO: Extends from base model
   @Prop({ required: true })
