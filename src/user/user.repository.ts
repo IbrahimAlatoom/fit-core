@@ -9,17 +9,17 @@ import { UserMapper } from './user.mapper';
 export class UserRepository {
   constructor(
     @InjectModel(UserModel.name) private userModel: Model<UserModel>,
-  ) { }
+  ) {}
 
   async createUser(user: User) {
-    const model = UserMapper.toModel(user);
-    await this.userModel.create(model);
+    const raw = UserMapper.toPersistence(user);
+    await this.userModel.create(raw);
     return user;
   }
 
   async findByIdAndUpdate(id: string, user: User) {
-    const model = UserMapper.toModel(user);
-    await this.userModel.findByIdAndUpdate(id, model);
+    const raw = UserMapper.toPersistence(user);
+    await this.userModel.findByIdAndUpdate(id, raw);
     return user;
   }
 
@@ -35,7 +35,6 @@ export class UserRepository {
 
   async findAllUsers() {
     const models = await this.userModel.find();
-    console.log(models) ;
     return models.map(UserMapper.toEntity);
   }
 }

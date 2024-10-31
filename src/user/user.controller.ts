@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { JwtAuthGuard } from '../auth/guard/jwt-auth.guard';
+import { UserMapper } from './user.mapper';
 
 @Controller('users')
 export class UserController {
@@ -17,18 +18,21 @@ export class UserController {
 
   @Get()
   async getAllUsers() {
-    return this.userService.findAll();
+    const users = await this.userService.findAll();
+    return users.map(UserMapper.toDto);
   }
 
   @UseGuards(JwtAuthGuard)
   @Get(':id')
   async getUserById(@Param('id') id: string) {
-    return this.userService.findById(id);
+    const user = await this.userService.findById(id);
+    return UserMapper.toDto(user);
   }
 
   @UseGuards(JwtAuthGuard)
   @Patch(':id')
   async updateUser(@Param('id') id: string, @Body() updateUserDto: any) {
-    return this.userService.update(id, updateUserDto);
+    const user = await this.userService.update(id, updateUserDto);
+    return UserMapper.toDto(user);
   }
 }

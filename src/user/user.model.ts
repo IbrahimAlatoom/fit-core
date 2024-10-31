@@ -2,10 +2,10 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import * as mongoose from 'mongoose';
 import * as bcrypt from 'bcryptjs';
-import { Account } from 'src/schemas/account.schema';
+import { Account } from 'src/account/account.entity';
 
 @Schema({
-  collection: "users"
+  collection: 'users',
 })
 export class UserModel extends Document {
   // TODO: Extends from base model
@@ -19,7 +19,7 @@ export class UserModel extends Document {
   password: string;
 
   @Prop()
-  accountsIds: string;
+  accountsIds: string[];
 
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Account' }] })
   accounts?: Account[];
