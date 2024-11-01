@@ -9,10 +9,12 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SignUpUserUseCase } from './usecases/signup-user.usecase';
 import { AccountModule } from 'src/account/account.module';
 import { LoginUserUseCase } from './usecases/login-user.usecase';
+import { OrganizationModule } from 'src/organization/organization.module';
 
 @Module({
   imports: [
     AccountModule,
+    OrganizationModule,
     UserModule,
     PassportModule,
     JwtModule.registerAsync({

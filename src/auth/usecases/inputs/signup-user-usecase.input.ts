@@ -8,4 +8,10 @@ export class SignUpUserUsecaseInput {
   @IsNotEmpty()
   @MinLength(6)
   password: string;
+  
+  @IsNotEmpty()
+  organizationName: string;
+
+  @IsNotEmpty()
+  organizationPhone: string;
 }

@@ -10,6 +10,9 @@ export class AccountModel extends Document {
 
   @Prop()
   role?: string;
+
+  @Prop()
+  organizationId?: string;
 }
 
 export const AccountSchema = SchemaFactory.createForClass(AccountModel);

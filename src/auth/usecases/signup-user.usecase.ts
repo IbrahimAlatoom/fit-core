@@ -7,6 +7,8 @@ import { Account } from 'src/account/account.entity';
 import { User } from 'src/user/user.entity';
 import { UserService } from 'src/user/user.service';
 import { UserAlreadyExistsException } from '../exceptions/UserAlreadyExists.exception';
+import { OrganizationService } from 'src/organization/organization.service';
+import { Organization } from 'src/organization/organization.entity';
 
 @Injectable()
 export class SignUpUserUseCase extends UseCase {
@@ -14,6 +16,7 @@ export class SignUpUserUseCase extends UseCase {
     private userService: UserService,
     private accountService: AccountService,
     private authService: AuthService,
+    private organizationService: OrganizationService,
   ) {
     super();
   }
@@ -26,6 +29,7 @@ export class SignUpUserUseCase extends UseCase {
     }
 
     const newAccount = Account.create({ userId: '' });
+    
 
     const newUser = User.create({
       email: input.email,
@@ -33,8 +37,17 @@ export class SignUpUserUseCase extends UseCase {
       accountsIds: [newAccount.id],
     });
 
+    const newOrganization = Organization.create({
+      name: input.organizationName,
+      phone: input.organizationPhone,
+      accountId: newAccount.id,
+    })
+    
+    const organization = await this.organizationService.create(newOrganization);
+
     const user = await this.userService.create(newUser);
     newAccount.setUserId(user.id);
+    newAccount.setOrganizationId(organization.id);
     await this.accountService.create(newAccount);
 
     return this.authService.login({ ...user, accountsIds: [] });
