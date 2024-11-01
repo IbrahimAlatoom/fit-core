@@ -8,6 +8,7 @@ import { JwtStrategy } from './strategy/jwt.strategy';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SignUpUserUseCase } from './usecases/signup-user.usecase';
 import { AccountModule } from 'src/account/account.module';
+import { LoginUserUseCase } from './usecases/login-user.usecase';
 
 @Module({
   imports: [
@@ -23,7 +24,7 @@ import { AccountModule } from 'src/account/account.module';
       inject: [ConfigService],
     }),
   ],
-  providers: [AuthService, JwtStrategy, SignUpUserUseCase],
+  providers: [AuthService, JwtStrategy, SignUpUserUseCase, LoginUserUseCase],
   controllers: [AuthController],
 })
 export class AuthModule {}

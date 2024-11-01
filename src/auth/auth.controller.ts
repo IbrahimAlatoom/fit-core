@@ -2,12 +2,15 @@ import { Controller, Post, Body, Request, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignUpUserUseCase } from './usecases/signup-user.usecase';
 import { SignUpUserUsecaseInput } from './usecases/inputs/signup-user-usecase.input';
+import { LoginUserUsecaseInput } from './usecases/inputs/login-user-usecase.input';
+import { LoginUserUseCase } from './usecases/login-user.usecase';
 
 @Controller('auth')
 export class AuthController {
   constructor(
     private authService: AuthService,
     private signUpUserUseCase: SignUpUserUseCase,
+    private loginUserUseCase: LoginUserUseCase,
   ) {}
 
   @Post('register')
@@ -16,9 +19,7 @@ export class AuthController {
   }
 
   @Post('login')
-  async login(@Body() body: { email: string; password: string }) {
-    const user = await this.authService.validateUser(body.email, body.password);
-    if (user) return this.authService.login(user);
-    return { error: 'Invalid credentials' };
+  async login(@Body() input: LoginUserUsecaseInput) {
+    return this.loginUserUseCase.excute(input);
   }
 }
