@@ -15,9 +15,9 @@ export class OrganizationRepository{
         return organizations;
     }
 
-    updateOrganization(organizations: Organization){
+    async updateOrganization(organizations: Organization){
         const raw = OrganizationMapper.toPersistence(organizations);
-        return this.organizationModel.updateOne({id: organizations.id}, raw);
+        return await this.organizationModel.updateOne({id: organizations.id}, raw);
     }
 
 }
