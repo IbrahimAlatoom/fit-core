@@ -25,11 +25,13 @@ export class UserRepository {
 
   async findUserById(id: string) {
     const model = await this.userModel.findOne({ id: id });
+    if (!model) return null;
     return UserMapper.toEntity(model);
   }
 
   async findByEmail(email: string) {
     const model = await this.userModel.findOne({ email: email });
+    if (!model) return null;
     return UserMapper.toEntity(model);
   }
 

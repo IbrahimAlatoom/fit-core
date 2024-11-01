@@ -9,7 +9,7 @@ export type UserProps = {
 export class User extends Entity {
   email: string;
   password: string;
-  accountsIds: string;
+  accountsIds: string[];
 
   private constructor(props: UserProps) {
     super();

@@ -7,9 +7,11 @@ import { UserModule } from '../user/user.module';
 import { JwtStrategy } from './strategy/jwt.strategy';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SignUpUserUseCase } from './usecases/signup-user.usecase';
+import { AccountModule } from 'src/account/account.module';
 
 @Module({
   imports: [
+    AccountModule,
     UserModule,
     PassportModule,
     JwtModule.registerAsync({
