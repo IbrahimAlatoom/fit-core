@@ -20,6 +20,7 @@ export class PlanMapper {
             price: PlanModel.price,
             currency: PlanModel.currency
         })
+        return plan;
     }
 
     static toPersistence(plan: Plan) {

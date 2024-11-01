@@ -1,28 +1,21 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 
-Schema(
-    {
-        collection: "plan"
-    }
-)
-export class PlanModel {
+@Schema({
+    collection: "package"
+})
+export class PackageModel {
     @Prop({ required: true })
     id: string;
-
     @Prop({ required: true })
     code: string;
-
     @Prop({ required: true })
     name: string;
-
     @Prop({ required: true })
     price: number;
-
     @Prop({ required: true })
     currency: string;
-
     @Prop({ required: true })
     features: string[]
 }
 
-export const PlanSchema = SchemaFactory.createForClass(PlanModel);
+export const PackageSchema = SchemaFactory.createForClass(PackageModel);
