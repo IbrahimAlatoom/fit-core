@@ -41,13 +41,13 @@ export class SignUpUserUseCase extends UseCase {
       accountId: newAccount.id,
     });
 
-    console.log(newOrganization);
 
     const organization = await this.organizationService.create(newOrganization);
 
     const user = await this.userService.create(newUser);
     newAccount.setUserId(user.id);
     newAccount.setOrganizationId(organization.id);
+    console.log(newAccount);
     await this.accountService.create(newAccount);
 
     return this.authService.login({ ...user, accountsIds: [] });

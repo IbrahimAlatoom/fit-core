@@ -12,6 +12,9 @@ export class AccountModel extends Document {
   role?: string;
 
   @Prop()
+  userId: string;
+
+  @Prop()
   organizationId?: string;
 }
 

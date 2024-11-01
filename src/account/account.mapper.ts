@@ -5,6 +5,8 @@ export class AccountMapper {
   static toDto(account: Account) {
     return {
       id: account.id,
+      userId: account.userId,
+      organizationId: account.organizationId,
       role: account.role,
     };
   }
@@ -13,6 +15,7 @@ export class AccountMapper {
     const account = Account.create({
       id: accountModel.id,
       userId: accountModel.id,
+      organizationId: accountModel.organizationId,
       role: accountModel.role,
     });
     return account;
@@ -22,6 +25,7 @@ export class AccountMapper {
     return {
       id: account.id,
       userId: account.userId,
+      organizationId: account.organizationId,
       role: account.role,
     };
   }
