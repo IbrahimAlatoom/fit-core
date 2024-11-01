@@ -3,7 +3,7 @@ import { Entity, EntityProps } from "src/lib/entity";
 export type SubscriptionProps = {
     accountId:string,
     planId: string;
-    packageId: string;
+    packagesId: string[];
     startDate: Date;
     endDate: Date;
 } & EntityProps;
@@ -12,7 +12,7 @@ export class Subscription extends Entity {
 
     accountId: string;
     planId: string;
-    packageId: string;
+    packagesId: string[];
     startDate: Date;
     endDate: Date;
 

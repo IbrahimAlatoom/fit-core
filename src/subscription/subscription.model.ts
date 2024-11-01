@@ -1,4 +1,5 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Document } from "mongoose";
 
 Schema(
     {
@@ -17,7 +18,7 @@ export class SubscriptionModel extends Document {
     planId: string;
 
     @Prop({ required: true })
-    packageId: string;
+    packagesId: string[];
 
     @Prop({ required: true })
     startDate: Date;

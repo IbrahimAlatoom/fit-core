@@ -7,7 +7,7 @@ export class SubscriptionMapper {
             id: subscription.id,
             accountId: subscription.accountId,
             planId: subscription.planId,
-            packageId: subscription.packageId,
+            packagesId: subscription.packagesId,
             startDate: subscription.startDate,
             endDate: subscription.endDate,
         }
@@ -18,7 +18,7 @@ export class SubscriptionMapper {
             id: subscriptionModel.id,
             accountId: subscriptionModel.accountId,
             planId: subscriptionModel.planId,
-            packageId: subscriptionModel.packageId,
+            packagesId: subscriptionModel.packagesId,
             startDate: subscriptionModel.startDate,
             endDate: subscriptionModel.endDate,
         });
@@ -30,7 +30,7 @@ export class SubscriptionMapper {
             id: subscription.id,
             accountId: subscription.accountId,
             planId: subscription.planId,
-            packageId: subscription.packageId,
+            packageId: subscription.packagesId,
             startDate: subscription.startDate,
             endDate: subscription.endDate,
         }
