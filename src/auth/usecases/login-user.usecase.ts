@@ -1,35 +1,31 @@
-import { UserService } from "src/user/user.service";
-import { LoginUserUsecaseInput } from "./inputs/login-user-usecase.input";
-import { UserNotFoundException } from "../exceptions/UserNotFound.exception";
-import * as bcrypt from "bcryptjs";
-import { InvalidPasswordException } from "../exceptions/InvalidPassword.exception";
-import { AuthService } from "../auth.service";
-import { Injectable } from "@nestjs/common";
-
+import { UserService } from 'src/user/user.service';
+import { LoginUserUsecaseInput } from './inputs/login-user-usecase.input';
+import * as bcrypt from 'bcryptjs';
+import { InvalidCredentialsException } from '../exceptions/InvalidCredentials.exception';
+import { AuthService } from '../auth.service';
+import { Injectable } from '@nestjs/common';
+import { UseCase } from 'src/lib/usecase';
 
 @Injectable()
-export class LoginUserUseCase{
-    constructor(
-        private userService: UserService,
-        private authService: AuthService,
-    ){}
+export class LoginUserUseCase extends UseCase {
+  constructor(
+    private userService: UserService,
+    private authService: AuthService,
+  ) {
+    super();
+  }
 
-    async excute(input: LoginUserUsecaseInput){
-        //Find The User By Email
-        const user = await this.userService.findByEmail(input.email);
-        if(!user){
-            return new UserNotFoundException();
-        }
-        //Verify The Password
-        const isPasswordValid = await bcrypt.compare(input.password, user.password);
-        if(!isPasswordValid){
-            return new InvalidPasswordException();
-        }
-
-        
-        return this.authService.login(user);
-
+  async execute(input: LoginUserUsecaseInput) {
+    const user = await this.userService.findByEmail(input.email);
+    if (!user) {
+      return new InvalidCredentialsException();
     }
 
+    const isPasswordValid = await bcrypt.compare(input.password, user.password);
+    if (!isPasswordValid) {
+      return new InvalidCredentialsException();
+    }
 
+    return this.authService.login(user);
+  }
 }

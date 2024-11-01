@@ -20,6 +20,6 @@ export class AuthController {
 
   @Post('login')
   async login(@Body() input: LoginUserUsecaseInput) {
-    return this.loginUserUseCase.excute(input);
+    return this.loginUserUseCase.execute(input);
   }
 }
