@@ -24,12 +24,10 @@ export class SignUpUserUseCase extends UseCase {
   async execute(input: SignUpUserUsecaseInput) {
     const existingUser = await this.userService.findByEmail(input.email);
     if (existingUser) {
-      // TODO:
       throw new UserAlreadyExistsException();
     }
 
     const newAccount = Account.create({ userId: '' });
-    
 
     const newUser = User.create({
       email: input.email,
@@ -41,8 +39,10 @@ export class SignUpUserUseCase extends UseCase {
       name: input.organizationName,
       phone: input.organizationPhone,
       accountId: newAccount.id,
-    })
-    
+    });
+
+    console.log(newOrganization);
+
     const organization = await this.organizationService.create(newOrganization);
 
     const user = await this.userService.create(newUser);

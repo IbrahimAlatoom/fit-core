@@ -8,8 +8,8 @@ import { JwtStrategy } from './strategy/jwt.strategy';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SignUpUserUseCase } from './usecases/signup-user.usecase';
 import { AccountModule } from 'src/account/account.module';
-import { LoginUserUseCase } from './usecases/login-user.usecase';
 import { OrganizationModule } from 'src/organization/organization.module';
+import { LoginWithCredentialsUseCase } from './usecases/login-with-credentials.usecase';
 
 @Module({
   imports: [
@@ -26,7 +26,12 @@ import { OrganizationModule } from 'src/organization/organization.module';
       inject: [ConfigService],
     }),
   ],
-  providers: [AuthService, JwtStrategy, SignUpUserUseCase, LoginUserUseCase],
+  providers: [
+    AuthService,
+    JwtStrategy,
+    SignUpUserUseCase,
+    LoginWithCredentialsUseCase,
+  ],
   controllers: [AuthController],
 })
 export class AuthModule {}

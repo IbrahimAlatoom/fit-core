@@ -1,16 +1,16 @@
-import { Controller, Post, Body, Request, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignUpUserUseCase } from './usecases/signup-user.usecase';
 import { SignUpUserUsecaseInput } from './usecases/inputs/signup-user-usecase.input';
 import { LoginUserUsecaseInput } from './usecases/inputs/login-user-usecase.input';
-import { LoginUserUseCase } from './usecases/login-user.usecase';
+import { LoginWithCredentialsUseCase } from './usecases/login-with-credentials.usecase';
 
 @Controller('auth')
 export class AuthController {
   constructor(
     private authService: AuthService,
     private signUpUserUseCase: SignUpUserUseCase,
-    private loginUserUseCase: LoginUserUseCase,
+    private loginWithCredentialsUseCase: LoginWithCredentialsUseCase,
   ) {}
 
   @Post('register')
@@ -20,6 +20,6 @@ export class AuthController {
 
   @Post('login')
   async login(@Body() input: LoginUserUsecaseInput) {
-    return this.loginUserUseCase.execute(input);
+    return this.loginWithCredentialsUseCase.execute(input);
   }
 }

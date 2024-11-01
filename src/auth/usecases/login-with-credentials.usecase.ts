@@ -7,7 +7,7 @@ import { Injectable } from '@nestjs/common';
 import { UseCase } from 'src/lib/usecase';
 
 @Injectable()
-export class LoginUserUseCase extends UseCase {
+export class LoginWithCredentialsUseCase extends UseCase {
   constructor(
     private userService: UserService,
     private authService: AuthService,
