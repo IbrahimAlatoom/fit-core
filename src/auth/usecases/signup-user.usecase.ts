@@ -6,6 +6,7 @@ import { AccountService } from 'src/account/account.service';
 import { Account } from 'src/account/account.entity';
 import { User } from 'src/user/user.entity';
 import { UserService } from 'src/user/user.service';
+import { UserAlreadyExistsException } from '../exceptions/UserAlreadyExists.exception';
 
 @Injectable()
 export class SignUpUserUseCase extends UseCase {
@@ -21,7 +22,7 @@ export class SignUpUserUseCase extends UseCase {
     const existingUser = await this.userService.findByEmail(input.email);
     if (existingUser) {
       // TODO:
-      return { message: 'User already exists' };
+      throw new UserAlreadyExistsException();
     }
 
     const newAccount = Account.create({ userId: '' });
